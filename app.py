@@ -13,6 +13,8 @@ from flask import render_template
 from flask import request
 from flask import url_for
 
+import re
+
 
 app = Flask(__name__)
 
@@ -45,6 +47,12 @@ def user_create():
 
     if not (name and email and birthdate and address_id):
         return make_response(jsonify({"message": "invalid input"}), 405)
+
+    if not is_email_valid(email):
+        return make_response(jsonify({"message": "invalid email input"}), 405)
+
+    if not is_birthdate_valid(birthdate):
+        return make_response(jsonify({"message": "invalid date input"}), 405)
 
     user = User(name=name,
                 email=email.lower(),
@@ -122,6 +130,38 @@ def user_delete(user_id):
     session.commit()
 
     return make_response(jsonify({"message": "user deleted"}), 200)
+
+
+def is_email_valid(email):
+    '''Email format check'''
+    # https://www.scottbrady91.com/Email-Verification/Python-Email-Verification-Script
+    if re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email):  # nopep8
+        return True
+
+    return False
+
+
+def is_birthdate_valid(birthdate):
+    '''Simplify date check, should check leap years also.'''
+    if len(birthdate) == 10:
+        try:
+            day = int(birthdate[0:2])
+            month = int(birthdate[3:5])
+            year = int(birthdate[6:10])
+        except ValueError:
+            return False
+
+        if not (birthdate[2] == '-' and birthdate[5] == '-'):
+            return False
+
+        if (day in range(1, 31) and month in range(1, 13) and year in range(1900, 2019)):  # nopep8
+            if (month == 4 or month == 6 or month == 9 or month == 11) and day < 31:  # nopep8
+                return True
+            if month == 2 and day < 30:
+                return True
+        return False
+
+    return False
 
 
 if __name__ == '__main__':
