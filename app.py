@@ -153,8 +153,12 @@ def is_date_valid(birthdate):
         if not (birthdate[2] == '-' and birthdate[5] == '-'):
             return False
 
-        if (day in range(1, 31) and month in range(1, 13) and year in range(1900, 2019)):  # nopep8
-            if (month == 4 or month == 6 or month == 9 or month == 11) and day < 31:  # nopep8
+        months_with_30_days = [4, 6, 9, 11]
+        months_with_31_days = [1, 3, 5, 6, 7, 8, 10, 12]
+        if (day in range(1, 32) and month in range(1, 13) and year in range(1900, 2019)):  # nopep8
+            if month in months_with_30_days and day < 31:
+                return True
+            if month in months_with_31_days and day < 32:
                 return True
             if month == 2 and day < 30:
                 return True
