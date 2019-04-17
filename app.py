@@ -134,7 +134,7 @@ def user_delete(user_id):
 def is_email_valid(email):
     '''Email format check'''
     # https://www.scottbrady91.com/Email-Verification/Python-Email-Verification-Script
-    if re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email):  # nopep8
+    if re.match(r'^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email):  # nopep8
         return True
 
     return False
