@@ -26,8 +26,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
-@app.route('/', methods=['GET'])
-@app.route('/getusers/', methods=['GET'])
+@app.route('/users/getusers/', methods=['GET'])
 def user_list():
     """List all users."""
     users = session.query(User).all()
@@ -36,7 +35,7 @@ def user_list():
     return make_response(serialized_users, 200)
 
 
-@app.route('/createUsers/', methods=['POST'])
+@app.route('/users/createUsers/', methods=['POST'])
 def user_create():
     """Create a user."""
     ra = request.args
@@ -66,7 +65,7 @@ def user_create():
     return make_response(serialized_user, 201)
 
 
-@app.route('/getusersById/<user_id>/', methods=['GET'])
+@app.route('/users/getusersById/<user_id>/', methods=['GET'])
 # @app.route('/getusersById/<int:user_id>/', methods=['GET'])
 def user_detail(user_id):
     """Get a user."""
@@ -84,7 +83,7 @@ def user_detail(user_id):
     return make_response(serialized_user, 200)
 
 
-@app.route('/updateUsersById/<user_id>/', methods=['PUT'])
+@app.route('/users/updateUsersById/<user_id>/', methods=['PUT'])
 def user_update(user_id):
     """Update a user."""
     try:
@@ -114,7 +113,7 @@ def user_update(user_id):
     return make_response(serialized_user, 200)
 
 
-@app.route('/deleteUsersById/<user_id>/', methods=['DELETE'])
+@app.route('/users/deleteUsersById/<user_id>/', methods=['DELETE'])
 def user_delete(user_id):
     """Delete a user."""
     try:
