@@ -50,7 +50,7 @@ def user_create():
     if not is_email_valid(email):
         return make_response(jsonify({"message": "invalid email input"}), 405)
 
-    if not is_birthdate_valid(birthdate):
+    if not is_date_valid(birthdate):
         return make_response(jsonify({"message": "invalid date input"}), 405)
 
     user = User(name=name,
@@ -140,7 +140,7 @@ def is_email_valid(email):
     return False
 
 
-def is_birthdate_valid(birthdate):
+def is_date_valid(birthdate):
     '''Simplify date check, should check leap years also.'''
     if len(birthdate) == 10:
         try:
