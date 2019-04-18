@@ -96,10 +96,19 @@ def user_update(user_id):
         return make_response(jsonify({"message": "user not found"}), 404)
 
     ra = request.args
+    if ra == {}:
+        return make_response(jsonify({"message": "invalid input"}), 405)
+
     name = user.name if 'name' not in ra else ra['name']
     email = user.email if 'email' not in ra else ra['email']
     birthdate = user.birthdate if 'birthdate' not in ra else ra['birthdate']
     address_id = user.address_id if 'address_id' not in ra else ra['address_id']  # nopep8
+
+    if not is_email_valid(email):
+        return make_response(jsonify({"message": "invalid email input"}), 405)
+
+    if not is_date_valid(birthdate):
+        return make_response(jsonify({"message": "invalid date input"}), 405)
 
     updated_user = User(name=name,
                         email=email.lower(),
