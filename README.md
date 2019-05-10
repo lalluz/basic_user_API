@@ -1,8 +1,13 @@
+# Description
+
+This is a codechallenge I developed to build a basic user API using Python, Flask and Postgres.
+
 ## Installation
 
 I developed the application in a virtualenv with Python 3.6.7 and the dependencies listed in requirements.txt.  
 
 To run the application locally:  
+    Create a Postgres database wih name 'codechallenge', user 'codechallenge' and password 'secret_passsword'. Grant all privileges to this user. [This tutorial](https://www.techrepublic.com/blog/diy-it-guy/diy-a-postgresql-database-server-setup-anyone-can-handle/) explains it really well.  
     Create a virtualenv in project root diretory:  
     `virtualenv -p python3.6 venv_name`  
     Activate it:  
@@ -20,6 +25,7 @@ To run the application locally:
 
 The software is a simple Python Flask API to list, create, update and delete users.  
 I chose to develop it using Flask just for familiarity with the tools. I considered Django, but Flask is lighter and I thought it would have been better for the purpose of this code challenge.  
+I used Postgres as database.  
 I deployed the application on AWS Lightsail using Apache2 as production server and Ubuntu 18.04 as OS.  
 
 I handled the exceptions required and a pair of input validation just to give a sample.  
@@ -37,4 +43,4 @@ I would have used Let's Encrypt via SSH with Certbot ACME to automatically gener
 https://www.getpostman.com/collections/c97cbc80f8e2223f69e7  
 
 ### GitHub Repo
-https://github.com/lalluz/codechallenge  
+https://github.com/lalluz/basic_user_API
