@@ -13,7 +13,9 @@ To run the application locally:
     Activate it:  
     `. venv_name/bin/activate`  
     Install dependencies:  
-    `pip install -r requirements.txt  `  
+    `pip install -r requirements.txt`  
+    Populate the database:  
+    `python db_populator.py`  
     Run the application at localhost:5000:  
     `python app.py`  
     Run tests:  
